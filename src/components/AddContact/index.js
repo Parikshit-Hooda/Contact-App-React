@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const AddPost = ({ contacts, addContact }) => {
@@ -8,7 +8,7 @@ const AddPost = ({ contacts, addContact }) => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,12 +38,12 @@ const AddPost = ({ contacts, addContact }) => {
 
     addContact(data);
     toast.success("Contact added successfully!!");
-    history.push("/");
+    navigate("/");
   };
 
   return (
     <div className="container-fluid">
-      <h1 className="text-center text-dark py-3 display-2">Add Post</h1>
+      <h1 className="text-center text-dark py-3 display-2">Add Contact</h1>
       <div className="row">
         <div className="col-md-6 p-5 mx-auto shadow">
           <form onSubmit={handleSubmit}>

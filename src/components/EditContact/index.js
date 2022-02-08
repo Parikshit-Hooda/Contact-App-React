@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { useHistory, useParams } from "react-router";
+import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const EditContact = ({ contacts, updateContact }) => {
   const { id } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
   const currentContact = contacts.find(
-    (contact) => contact.id === parseInt(id)
+    (contact) => contact.id === parseInt(id, 10)
   );
 
   useEffect(() => {
@@ -52,7 +53,7 @@ const EditContact = ({ contacts, updateContact }) => {
 
     updateContact(data);
     toast.success("Contact updated successfully!!");
-    history.push("/");
+    navigate("/");
   };
 
   return (
@@ -60,7 +61,7 @@ const EditContact = ({ contacts, updateContact }) => {
       <div className="row d-flex flex-column">
         <button
           className="btn btn-dark ml-auto my-5"
-          onClick={() => history.push("/")}
+          onClick={() => navigate("/")}
         >
           Go back
         </button>
@@ -98,7 +99,7 @@ const EditContact = ({ contacts, updateContact }) => {
                 <button
                   type="button"
                   className="btn btn-danger"
-                  onClick={() => history.push("/")}
+                  onClick={() => navigate("/")}
                 >
                   cancel
                 </button>
